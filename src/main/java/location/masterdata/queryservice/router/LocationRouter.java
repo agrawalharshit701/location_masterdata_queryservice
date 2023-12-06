@@ -19,6 +19,9 @@ public class LocationRouter {
                 .GET("/getLocationById/{id}", locationHandler::getLocationDetails)
                 .GET("/getLocationByName/{name}", locationHandler::getByLocationName)
                 .GET("/getBdaTypeById/{id}", locationHandler::getBdaTypeById)
+                .GET("/", request -> ServerResponse.ok()
+                        .contentType(MediaType.TEXT_PLAIN)
+                        .bodyValue("Welcome to the Location API!"))
                 .build();
     }
 
