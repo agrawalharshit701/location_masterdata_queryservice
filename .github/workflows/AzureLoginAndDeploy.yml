@@ -9,6 +9,7 @@ env:
   resourceGroup: 'location-masterdata-cluster'
   kubernatesversion: '1.19.6'
   name: 'location-masterdata-k6-cluster'
+  location: 'eastus'  # Specify the correct location
 
 jobs:
   build:
@@ -24,5 +25,5 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           inlineScript: |
-            az group create --location westus --resource-group ${{ env.resourceGroup }}
+            az group create --location ${{ env.location }} --resource-group ${{ env.resourceGroup }}
             az aks create -g ${{ env.resourceGroup }} -n ${{ env.name }} --kubernetes-version ${{ env.kubernatesversion }} --generate-ssh-keys
