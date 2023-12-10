@@ -7,7 +7,6 @@ on:
 
 env:
   resourceGroup: 'location-masterdata-cluster'
-  kubernatesversion: '1.19.6'
   name: 'location-masterdata-k6-cluster'
   location: 'eastus'  # Specify the correct location
 
@@ -30,8 +29,8 @@ jobs:
             
             if [ -z "$cluster_exists" ]; then
               # If the cluster doesn't exist, create a new one
-              az aks create -g ${{ env.resourceGroup }} -n ${{ env.name }} --kubernetes-version ${{ env.kubernatesversion }} --generate-ssh-keys
+              az aks create -g ${{ env.resourceGroup }} -n ${{ env.name }} --generate-ssh-keys
             else
               # If the cluster exists, update it
-              az aks update -g ${{ env.resourceGroup }} -n ${{ env.name }} --kubernetes-version ${{ env.kubernatesversion }}
+              az aks update -g ${{ env.resourceGroup }} -n ${{ env.name }}
             fi
