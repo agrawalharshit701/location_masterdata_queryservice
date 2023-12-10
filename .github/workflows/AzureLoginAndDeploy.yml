@@ -32,5 +32,5 @@ jobs:
               az aks create -g ${{ env.resourceGroup }} -n ${{ env.name }} --generate-ssh-keys
             else
               # If the cluster exists, update it
-              az aks update -g ${{ env.resourceGroup }} -n ${{ env.name }}
+              az aks update -g ${{ env.resourceGroup }} -n ${{ env.name }} --yes
             fi
