@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+env:
+ resourceGroup: 'location-masterdata-cluster'
+ kubernatesversion: '1.19.6'
+ name: 'location-masterdata-k6-cluster'
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,9 +19,17 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+      - name: Azure Cli action
+        uses: Azure/cli@1.0.4
         with:
-          app-name: 'your-web-app-name'
-          slot-name: 'your-slot-name'
-          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+         inlineScript: az aks create -g {{env.resourceGroup}} -n ${{env.name}} --kubernetes-version ${{env.kubernatesversion}} --generate=ssh-key
+              
+   
+
+
+
+
+ 
+
+
+      
