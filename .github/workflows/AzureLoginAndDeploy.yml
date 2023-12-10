@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+
 env:
- resourceGroup: 'location-masterdata-cluster'
- kubernatesversion: '1.19.6'
- name: 'location-masterdata-k6-cluster'
+  resourceGroup: 'location-masterdata-cluster'
+  kubernatesversion: '1.19.6'
+  name: 'location-masterdata-k6-cluster'
 
 jobs:
   build:
@@ -19,17 +20,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Azure Cli action
+      - name: Azure CLI action
         uses: Azure/cli@1.0.4
         with:
-         inlineScript: az aks create -g {{env.resourceGroup}} -n ${{env.name}} --kubernetes-version ${{env.kubernatesversion}} --generate=ssh-key
-              
-   
-
-
-
-
- 
-
-
-      
+          inlineScript: |
+            az group create --location westus --resource-group ${{ env.resourceGroup }}
+            az aks create -g ${{ env.resourceGroup }} -n ${{ env.name }} --kubernetes-version ${{ env.kubernatesversion }} --generate-ssh-keys
