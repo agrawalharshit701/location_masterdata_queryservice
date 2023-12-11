@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: location-refrence-automatic-deploy
+  labels:
+    app: location-refrence-automatic-deploy
+  namespace: namespace-workflow-1702271981250
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: location-refrence-automatic-deploy
+  template:
+    metadata:
+      labels:
+        app: location-refrence-automatic-deploy
+    spec:
+      containers:
+        - name: location-refrence-automatic-deploy
+          image: acrworkflow1702271981250.azurecr.io/image-workflow-1702271981250:latest
+          ports:
+            - containerPort: 8087
