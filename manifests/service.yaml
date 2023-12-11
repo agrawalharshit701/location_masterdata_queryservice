@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: location-refrence-automatic-deploy
+  namespace: namespace-workflow-1702271981250
+spec:
+  type: LoadBalancer
+  selector:
+    app: location-refrence-automatic-deploy
+  ports:
+    - protocol: TCP
+      port: 8087
+      targetPort: 8087
